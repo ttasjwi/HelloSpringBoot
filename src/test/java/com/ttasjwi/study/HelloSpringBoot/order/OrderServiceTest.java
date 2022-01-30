@@ -22,7 +22,7 @@ class OrderServiceTest {
     }
 
     @Test
-    @DisplayName("VIP일 때 1000원 할인이 주문정보에 정상적으로 반영되어야한다.")
+    @DisplayName("VIP일 때 10% 할인이 주문정보에 정상적으로 반영되어야한다.")
     void createOrderTest_vip() {
         //given
         Long memberId = 1L;
@@ -30,10 +30,10 @@ class OrderServiceTest {
         memberService.join(member);
 
         //when
-        Order order = orderService.createOrder(memberId, "itemA", 10000);
+        Order order = orderService.createOrder(memberId, "itemA", 30000);
 
         //then
-        assertThat(order.getDiscountPrice()).isEqualTo(1000);
+        assertThat(order.getDiscountPrice()).isEqualTo(3000);
     }
 
     @Test
