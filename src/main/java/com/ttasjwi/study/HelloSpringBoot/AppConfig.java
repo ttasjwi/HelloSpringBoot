@@ -1,6 +1,8 @@
 package com.ttasjwi.study.HelloSpringBoot;
 
+import com.ttasjwi.study.HelloSpringBoot.discount.DiscountPolicy;
 import com.ttasjwi.study.HelloSpringBoot.discount.RateDiscountPolicy;
+import com.ttasjwi.study.HelloSpringBoot.member.MemberRepository;
 import com.ttasjwi.study.HelloSpringBoot.member.MemberService;
 import com.ttasjwi.study.HelloSpringBoot.member.MemberServiceImpl;
 import com.ttasjwi.study.HelloSpringBoot.member.MemoryMemberRepository;
@@ -21,10 +23,18 @@ public class AppConfig {
     }
 
     public MemberService memberService() {
-        return new MemberServiceImpl(MemoryMemberRepository.getInstance());
+        return new MemberServiceImpl(memberRepository());
     }
 
     public OrderService orderService() {
-        return new OrderServiceImpl(MemoryMemberRepository.getInstance(), new RateDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    public MemberRepository memberRepository() {
+        return MemoryMemberRepository.getInstance();
+    }
+
+    public DiscountPolicy discountPolicy() {
+        return new RateDiscountPolicy();
     }
 }
