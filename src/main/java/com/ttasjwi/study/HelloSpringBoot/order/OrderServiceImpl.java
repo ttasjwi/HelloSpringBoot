@@ -1,15 +1,18 @@
 package com.ttasjwi.study.HelloSpringBoot.order;
 
 import com.ttasjwi.study.HelloSpringBoot.discount.DiscountPolicy;
-import com.ttasjwi.study.HelloSpringBoot.discount.RateDiscountPolicy;
 import com.ttasjwi.study.HelloSpringBoot.member.Member;
 import com.ttasjwi.study.HelloSpringBoot.member.MemberRepository;
-import com.ttasjwi.study.HelloSpringBoot.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository = MemoryMemberRepository.getInstance();
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+    private MemberRepository memberRepository;
+    private DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {

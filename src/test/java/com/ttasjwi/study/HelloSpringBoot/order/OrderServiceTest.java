@@ -1,9 +1,9 @@
 package com.ttasjwi.study.HelloSpringBoot.order;
 
+import com.ttasjwi.study.HelloSpringBoot.AppConfig;
 import com.ttasjwi.study.HelloSpringBoot.member.Grade;
 import com.ttasjwi.study.HelloSpringBoot.member.Member;
 import com.ttasjwi.study.HelloSpringBoot.member.MemberService;
-import com.ttasjwi.study.HelloSpringBoot.member.MemberServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,9 @@ class OrderServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        this.memberService = new MemberServiceImpl();
-        this.orderService = new OrderServiceImpl();
+        AppConfig appConfig = AppConfig.getInstance();
+        this.memberService = appConfig.memberService();
+        this.orderService = appConfig.orderService();
     }
 
     @Test

@@ -2,7 +2,10 @@ package com.ttasjwi.study.HelloSpringBoot.member;
 
 public class MemberServiceImpl implements MemberService{
 
-    private MemberRepository memberRepository = MemoryMemberRepository.getInstance();
+    private MemberRepository memberRepository;
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public void join(Member member) {
