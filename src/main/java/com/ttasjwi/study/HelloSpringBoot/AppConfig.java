@@ -8,32 +8,28 @@ import com.ttasjwi.study.HelloSpringBoot.member.MemberServiceImpl;
 import com.ttasjwi.study.HelloSpringBoot.member.MemoryMemberRepository;
 import com.ttasjwi.study.HelloSpringBoot.order.OrderService;
 import com.ttasjwi.study.HelloSpringBoot.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class AppConfig {
 
-    private static AppConfig instatce;
-
-    private AppConfig() {}
-
-    public static AppConfig getInstance() {
-        if (instatce == null) {
-            instatce = new AppConfig();
-        }
-        return instatce;
-    }
-
+    @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
 
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
+    @Bean
     public MemberRepository memberRepository() {
-        return MemoryMemberRepository.getInstance();
+        return new MemoryMemberRepository();
     }
 
+    @Bean
     public DiscountPolicy discountPolicy() {
         return new RateDiscountPolicy();
     }
