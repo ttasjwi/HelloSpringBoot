@@ -3,12 +3,16 @@ package com.ttasjwi.study.HelloSpringBoot.order;
 import com.ttasjwi.study.HelloSpringBoot.discount.DiscountPolicy;
 import com.ttasjwi.study.HelloSpringBoot.member.Member;
 import com.ttasjwi.study.HelloSpringBoot.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     private MemberRepository memberRepository;
     private DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
