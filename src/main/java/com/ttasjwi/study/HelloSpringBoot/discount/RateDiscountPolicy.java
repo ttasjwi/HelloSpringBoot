@@ -2,9 +2,11 @@ package com.ttasjwi.study.HelloSpringBoot.discount;
 
 import com.ttasjwi.study.HelloSpringBoot.member.Grade;
 import com.ttasjwi.study.HelloSpringBoot.member.Member;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
+@Primary
 public class RateDiscountPolicy implements DiscountPolicy {
 
     private final int DISCOUNT_PERCENT = 10;
