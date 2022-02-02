@@ -1,17 +1,23 @@
 package com.ttasjwi.study.HelloSpringBoot.order;
 
+import com.ttasjwi.study.HelloSpringBoot.annotation.MainDiscountPolicy;
 import com.ttasjwi.study.HelloSpringBoot.discount.DiscountPolicy;
 import com.ttasjwi.study.HelloSpringBoot.member.Member;
 import com.ttasjwi.study.HelloSpringBoot.member.MemberRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
+
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
