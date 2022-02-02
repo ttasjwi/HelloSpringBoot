@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberServiceImpl implements MemberService{
 
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @Autowired // 내부적으로 ac.getBean("MemberRepository.class")비슷한 기능으로 빈을 호출해서 의존관계를 주입해줌)
     public MemberServiceImpl(MemberRepository memberRepository) {
