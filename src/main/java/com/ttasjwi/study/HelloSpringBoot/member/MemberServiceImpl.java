@@ -1,17 +1,13 @@
 package com.ttasjwi.study.HelloSpringBoot.member;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
-
-    @Autowired // 내부적으로 ac.getBean("MemberRepository.class")비슷한 기능으로 빈을 호출해서 의존관계를 주입해줌)
-    public MemberServiceImpl(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
 
     @Override
     public void join(Member member) {
