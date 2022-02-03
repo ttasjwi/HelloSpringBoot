@@ -1,13 +1,14 @@
 package com.ttasjwi.study.HelloSpringBoot.lifecycle;
 
-public class NetworkClient {
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+public class NetworkClient implements InitializingBean, DisposableBean {
 
     private String url;
 
     public NetworkClient() {
         System.out.printf("생성자 호출 -  url = %s%n", url);
-        connect();
-        call("초기화 연결 메시지");
     }
 
     public void setUrl(String url) {
@@ -25,5 +26,18 @@ public class NetworkClient {
 
     public void disconnect() {
         System.out.printf("close : %s%n",this.url);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("NetworkClient.afterPropertiesSet");
+        connect();
+        call("초기화 연결 메시지");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("NetworkClient.destroy");
+        disconnect();
     }
 }
