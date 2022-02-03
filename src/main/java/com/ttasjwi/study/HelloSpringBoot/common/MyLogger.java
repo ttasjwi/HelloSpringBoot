@@ -25,12 +25,12 @@ public class MyLogger {
     @PostConstruct // 빈 생성 후 초기화
     public void init() {
         this.uuid = UUID.randomUUID().toString();
-        System.out.printf("[%s][%s]{request scope bean create : %s}%n", this.uuid, this.requestURL, this);
+        System.out.printf("[%s]{request scope bean create : %s}%n", this.uuid, this);
     }
 
     @PreDestroy // 빈 소멸 전
     public void close() {
-        System.out.printf("[%s][%s]{request scope bean close : %s}%n", this.uuid, this.requestURL, this);
+        System.out.printf("[%s]{request scope bean close : %s}%n", this.uuid, this);
     }
 
 }
