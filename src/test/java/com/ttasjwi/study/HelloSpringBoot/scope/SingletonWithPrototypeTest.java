@@ -17,9 +17,11 @@ public class SingletonWithPrototypeTest {
 
         @Autowired
         private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        //private Provider<PrototypeBean> prototypeBeanProvider;
 
         public int logic() {
             PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            //PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
