@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LogDemoService {
 
-    private final ObjectProvider<MyLogger> myLoggerProvider;
-    //private final MyLogger myLogger; // MyLogger을 바로 주입해버리면, 오류가 발생함 (MyLogger의 빈 스코프는 Request임...)
+    private final MyLogger myLogger;
 
     public void logic(String id) {
-        MyLogger myLogger = myLoggerProvider.getObject();
         myLogger.log("service id = " + id);
     }
 }

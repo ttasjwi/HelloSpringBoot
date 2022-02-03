@@ -14,17 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
-    //private final MyLogger myLogger; // MyLogger을 바로 주입해버리면, 오류가 발생함 (MyLogger의 빈 스코프는 Request임...)
+    private final MyLogger myLogger;
 
     @RequestMapping("log-demo") // log-demo 요청에 대하여
     @ResponseBody // view 없이 바로 객체(문자열)를 반환
     public String logDemo(HttpServletRequest request) {
         String requestURL = request.getRequestURL().toString();
 
-        MyLogger myLogger = myLoggerProvider.getObject(); // 요청당 1개의 MyLogger 빈 호출이 보장됨(빈 스코프 : request)
-        myLogger.setRequestURL(requestURL);
+        System.out.println("myLogger = " + myLogger.getClass());
+        //myLogger = class com.ttasjwi.study.HelloSpringBoot.common.MyLogger$$EnhancerBySpringCGLIB$$4785bcf7
+        //스프링 내부적으로 MyLogger의 바이트 코드 조작을 거쳐, 상속체를 만듬.
+        //상속체가 의존관계 주입이 되고 MyLogger의 프록시 역할을 수행함. (MyLogger을 호출하여, 요청함)
 
+        myLogger.setRequestURL(requestURL);
         myLogger.log("controller test");
 
         try {

@@ -1,14 +1,21 @@
 package com.ttasjwi.study.HelloSpringBoot.common;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.UUID;
 
 @Component
-@Scope(value = "request") // 빈스코프 : request 스코프(http 요청마다 하나당 생성 및 요청이 끝날 때 소멸)
+//@RequestScope : 이거로 대체해서 써도 될 듯? (https://www.baeldung.com/spring-bean-scopes)
+@Scope (
+        value = WebApplicationContext.SCOPE_REQUEST, // == "request"
+        proxyMode = ScopedProxyMode.TARGET_CLASS
+)
 public class MyLogger {
 
     private String uuid;
